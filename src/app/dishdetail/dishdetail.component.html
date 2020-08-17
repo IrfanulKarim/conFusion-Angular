@@ -28,7 +28,7 @@
     <div fxFlex="40">
       <mat-list *ngIf="dish">
           <h3>Comments</h3>
-          <mat-list-item *ngFor="let customer of customer_comments">
+          <mat-list-item *ngFor="let customer of dish.comments">
               <p matLine>{{ customer.comment }}</p>
               <p matLine>{{ customer.rating }} Stars</p>
               <p matLine>-- {{ customer.author }} {{ customer.date | date }}</p>
