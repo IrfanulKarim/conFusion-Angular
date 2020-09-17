@@ -60,7 +60,8 @@
   <div class="container"
         fxlayout="column"
         fxLayout.gt-sm="column"
-        fxLayoutGap="10px">
+        fxLayoutGap="10px"
+        *ngIf="leaders">
 
         <mat-list fxFlex *ngFor="let leader of leaders">
           <mat-list-item>
@@ -75,7 +76,9 @@
           </mat-list-item>
 
         </mat-list>
-
+  </div>
+  <div [hidden]="leaders">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
   
 </div>
