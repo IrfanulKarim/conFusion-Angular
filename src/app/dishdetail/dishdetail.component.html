@@ -31,8 +31,14 @@
       <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
     </div>
 
-    <div fxFlex="40">
-      <mat-list *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish"
+    
+    
+    
+    
+    
+    >
+      <mat-list >
           <h3>Comments</h3>
           <mat-list-item *ngFor="let customer of dish.comments">
               <p matLine>{{ customer.comment }}</p>
