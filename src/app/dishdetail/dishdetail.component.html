@@ -31,13 +31,7 @@
       <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
     </div>
 
-    <div fxFlex="40" *ngIf="dish"
-    
-    
-    
-    
-    
-    >
+    <div fxFlex="40" *ngIf="dish">
       <mat-list >
           <h3>Comments</h3>
           <mat-list-item *ngFor="let customer of dish.comments">
@@ -46,6 +40,42 @@
               <p matLine>-- {{ customer.author }} {{ customer.date | date }}</p>
           </mat-list-item>
       </mat-list>
+
+      <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+          <mat-form-field class="full-width">
+            <input matInput formControlName="author" placeholder="Name" type="text" required>
+            <mat-error *ngIf="commentFormErrors.author">
+              {{commentFormErrors.author}}
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-slider
+              thumbLabel
+              [displayWith]="formatLabel"
+              tickInterval="1"
+              min="1"
+              max="5"
+              formControlName="rating">
+          </mat-slider>
+          <mat-error *ngIf="commentFormErrors.rating">
+            {{commentFormErrors.rating}}
+          </mat-error>
+        </p>
+        <p>
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="comment" placeholder="Comment" rows="10" required></textarea>
+            <mat-error *ngIf="commentFormErrors.comment">
+              {{commentFormErrors.comment}}
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <button [disabled]="cform.form.invalid" type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      </form>
+      
     </div>
+
+    
 
 </div>
