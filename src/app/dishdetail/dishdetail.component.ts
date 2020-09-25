@@ -30,7 +30,7 @@ export class DishdetailComponent implements OnInit {
 
   commentFormErrors = {
     'author':'',
-    'rating':'',
+    'rating': '',
     'comment':''
   };
 
@@ -38,6 +38,9 @@ export class DishdetailComponent implements OnInit {
     'author':{
       'required': 'Name is required.',
       'minlength':'Name should be at least 2 character.'
+    },
+    'rating':{
+      'required': 'Rating is required.'
     },
     'comment':{
       'required': 'Comment is required',
