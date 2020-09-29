@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MatListModule} from '@angular/material/list';
 import { MatGridListModule} from '@angular/material/grid-list';
@@ -18,6 +17,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
