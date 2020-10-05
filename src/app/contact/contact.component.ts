@@ -1,8 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { validateBasis } from '@angular/flex-layout';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { flyInOut} from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
+import { Params, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { baseURL } from '../shared/baseurl';
+import { expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-contact',
@@ -14,6 +19,7 @@ import { flyInOut} from '../animations/app.animation';
   },
   animations:[
     flyInOut(),
+    expand()
     
   ]
 })
@@ -21,6 +27,10 @@ export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  formstatus: boolean;
+  feedbackstatus: boolean;
+  spinner: boolean;
+  feedbackerrMess: string;
   contactType= ContactType;
   @ViewChild('fform') feedbackFormDirective;
 
@@ -54,7 +64,9 @@ export class ContactComponent implements OnInit {
   };
     
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder,
+    private feedbackService: FeedbackService,
+    @Inject ('BaseURL') private BaseURL) { 
     this.createForm();
   }
 
@@ -102,17 +114,36 @@ export class ContactComponent implements OnInit {
   onSubmit(){
     this.feedback=this.feedbackForm.value;
     console.log(this.feedback);
-    this.feedbackForm.reset({
-      firstname:'',
-      lastname:'',
-      telnum:0,
-      email:'',
-      agree:false,
-      contacttype:'None',
-      message:''
-    });
 
-   
+    this.feedbackService.submitFeedback(this.feedback)
+    .subscribe(feedback => this.feedback = feedback,
+      errmess => this.feedbackerrMess = <any>errmess)
+
+      this.feedbackstatus = false;
+      this.formstatus = false;
+      this.spinner = true;
+
+      setTimeout(() => {
+        this.feedbackstatus = true;
+        // this.formstatus = true;
+        this.spinner = false;
+      }, 2000 );
+
+      setTimeout(() => {
+        this.feedbackstatus = false;
+        this.formstatus = true;
+      }, 5000 );
+
+      
+      this.feedbackForm.reset({
+        firstname:'',
+        lastname:'',
+        telnum:0,
+        email:'',
+        agree:false,
+        contacttype:'None',
+        message:''
+      });
 
     this.feedbackFormDirective.resetForm();
   }
