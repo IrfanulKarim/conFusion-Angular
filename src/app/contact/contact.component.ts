@@ -125,7 +125,6 @@ export class ContactComponent implements OnInit {
 
       setTimeout(() => {
         this.feedbackstatus = true;
-        // this.formstatus = true;
         this.spinner = false;
       }, 2000 );
 
