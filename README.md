@@ -1,3 +1,5 @@
+![Uploading screencapture-localhost-4200-home-2020-10-13-01_17_46.png…]()
+
 # ConFusion
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
